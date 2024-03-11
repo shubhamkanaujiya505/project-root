@@ -9,8 +9,14 @@ class Blog extends BaseController
 {
     public function index()
     {
-        echo view("header");
-        echo view("myview");
-        echo view("footer");
+        $person = [
+            'name' => 'John',
+            'age' => 30,
+            'city' => 'New York',
+            'subject' => ['html','css','java','js','jquery','ajax']
+        ];
+       
+        echo view("myview",$person);
+        
     }
 }
