@@ -7,9 +7,16 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class Test extends BaseController
 {
+    public $parser;
+
+    public function __construct()
+    {
+       $this->parser = \config\Services::parser();
+    }
+
     public function index()
     {
-    $parser = \config\Services::parser();
+    
     // Creating an associative array
     $person = [
         'name' => 'John',
@@ -27,9 +34,21 @@ class Test extends BaseController
     // $parser->setData($person);
     // return $parser->render("myview");
 
-    return $parser->setData($person)->render("myview"); // alternate method to show the data using parser view also called chaining method
+    return $this->parser->setData($person)->render("myview"); // alternate method to show the data using parser view also called chaining method
 
     // echo view("myview",$person); // old method to show the data without parser view
+    }
+
+    public function viewFilters(){
+        $parser = \config\Services::parser();
+        $person = [
+            'name' => 'shubham kanaujiya',
+            'age' => 30,
+            'city' => 'New York',
+            'date' => '12-03-2024',
+            'price' => '500'
+        ];
+        return $this->parser->setData($person)->render("filterView");
     }
 }
 
